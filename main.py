@@ -12,28 +12,7 @@ server = Flask(__name__)
 
 @bot.message_handler(commands = ['start'])
 def start(message):
-  bot.send_message(message.chat.id, 'чем я могу помочь?')
-  img = open("z.jpg", 'rb')
-  bot.send_photo(message.chat.id, img)
-  img.close()
-  keyboard = types.InlineKeyboardMarkup()
-  button1 = types.InlineKeyboardButton(text='Аниме', callback_data='first_1')
-  button2 = types.InlineKeyboardButton(text='Космос', callback_data='first_2')
-  keyboard.add(button1)
-  keyboard.add(button2)
-  bot.send_message(message.chat.id, text="Выбери тематику фото", reply_markup=keyboard)
-
-@bot.callback_query_handler(func=lambda call: call.data.startswith('first'))
-def query_handler(call):
-  bot.answer_callback_query(callback_query_id=call.id) 
-  if call.data == 'first_1':
-      img = open("a.jpg", "rb")
-      bot.send_photo(call.message.chat.id, img)
-      img.close()
-  elif call.data == 'first_2':
-      img = open("b.jpg", "rb")
-      bot.send_photo(call.message.chat.id, img)
-      img.close()
+  bot.send_message(message.chat.id, text="Выбери тематику фото")
       
       
 @server.route('/' + TOKEN, methods=['POST'])
